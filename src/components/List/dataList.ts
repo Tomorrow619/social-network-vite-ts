@@ -38,7 +38,7 @@ export const dataList:IDataList[] = [
 },
     {
     listImg:"./img/profile/profile-img-7.jpeg",
-    listMain:"Словарный запасE",
+    listMain:"Словарный запасe",
     listSecondary:"Литература",
 },
     {

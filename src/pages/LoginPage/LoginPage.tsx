@@ -6,6 +6,7 @@ import { SLoginPage } from "./LoginPage.style";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useLoginUserMutation } from "../../store/API/authApi";
 
 const AuthFormScheme = yup.object({
   userEmail: yup
@@ -38,8 +39,16 @@ export const LoginPage = () => {
       userPassword: "",
     },
   });
+  const  [loginUser,{ data: userData } ]= useLoginUserMutation( );
+
+
   const formData: SubmitHandler<SLoginPage> = (data) => {
-    return console.log(data);
+    const payloud = {
+      email: data.userEmail,
+      password: data.userPassword,
+    };
+    loginUser(payloud);
+    
   };
   return (
     <SLoginPage>

@@ -1,3 +1,5 @@
+import { Badge } from "../Badge/Badge"
+
 import React from "react"
 
 type TNavbarLi = {
@@ -15,7 +17,7 @@ export const NavbarLi = ({
   liId,
   liText,
 }:TNavbarLi)=>{
-  return(
+  return( 
     <li className="navbar__item">
           <svg
             className={liName}
@@ -29,7 +31,7 @@ export const NavbarLi = ({
             />
           </svg>
           <p className="item__name">{liText}</p>
-          <span className="Badge">1</span>
+          <Badge badgeText="1" />
         </li>
   )
 }

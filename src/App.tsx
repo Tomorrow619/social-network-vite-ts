@@ -6,7 +6,7 @@ import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
 
 
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
-import { Scontainer } from "./themes/Container.style";
+import { SContainer } from "./themes/Container.style";
 
 function App() {
   const routerConfig = createBrowserRouter([
@@ -25,11 +25,11 @@ function App() {
     
   ]) 
   return (
-    <Scontainer>
+    <SContainer>
       <div className="container">
        <RouterProvider router={routerConfig}  />
       </div>
-    </Scontainer>
+    </SContainer>
   );
 }
 

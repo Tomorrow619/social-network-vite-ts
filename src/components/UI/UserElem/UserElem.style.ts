@@ -1,7 +1,8 @@
-import styled from "styled-components";
-export const SUserElem = styled.div `
+import styled from "styled-components"
 
+export const SUserElem = styled.div`
  
+
   cursor: pointer;
   position: relative;
   list-style: none;
@@ -16,19 +17,19 @@ export const SUserElem = styled.div `
   transition: 200ms;
 
   &:hover {
-    background-color: ${(props)=>props.theme.color.lightGray};
+    background-color: ${(props) => props.theme.color.lightGray};
   }
 
   &:active {
     transition: 100ms;
-    background-color: ${(props)=>props.theme.color.primeColor};
+    background-color: ${(props) => props.theme.color.primeColor};
     p {
       color: white;
     }
 
     .Badge {
       background-color: white;
-      color: ${(props)=>props.theme.color.textColor};
+      color: ${(props) => props.theme.color.textColor};
     }
   }
 
@@ -39,7 +40,7 @@ export const SUserElem = styled.div `
       content: "";
       height: 1px;
       width: 80%;
-      background-color: ${(props)=>props.theme.color.lightGray};
+      background-color: ${(props) => props.theme.color.lightGray};
 
       position: absolute;
       bottom: -8px;
@@ -70,11 +71,11 @@ export const SUserElem = styled.div `
     font-weight: 300;
 
     &._online {
-      color: ${(props)=>props.theme.color.green};
+      color: ${(props) => props.theme.color.green};
     }
   }
- 
-    cursor: default;
+  
+    /* cursor: default;
     padding: 0;
     margin-bottom: 30px;
 
@@ -92,7 +93,7 @@ export const SUserElem = styled.div `
       height: 60px;
       border-radius: 50%;
       object-fit: cover;
-    }
+    } */
   
 
 `
