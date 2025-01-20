@@ -4,6 +4,7 @@ import "./MainPage.scss";
 import { SMainPage } from "./SMainPage.style";
 import { List } from "../../components/List/List";
 import { NavBar } from "../../components/NavBar/NavBar";
+import { Friends } from "../../components/Friends/Friends";
 
 export const MainPage = () => {
   return (
@@ -580,36 +581,7 @@ export const MainPage = () => {
           </div>
         </main>
         <aside className="RightSide">
-          <div className="List">
-            <div className="List__title">
-              <h2>Близкие друзья</h2>
-              <span className="count">123</span>
-            </div>
-            <div className="UserElem">
-              <img src="./img/users/aleksandr-maykov.jpeg" alt="User" />
-              <div className="user__description">
-                <p className="main__text">Александр Майков</p>
-                <p className="secondary__text _online">Онлайн</p>
-              </div>
-              <span className="Badge">3</span>
-            </div>
-            <div className="UserElem">
-              <img src="./img/users/aleksandr-maykov.jpeg" alt="User" />
-              <div className="user__description">
-                <p className="main__text">Александр Майков</p>
-                <p className="secondary__text _online">Онлайн</p>
-              </div>
-              <span className="Badge">3</span>
-            </div>
-            <div className="UserElem">
-              <img src="./img/users/aleksandr-maykov.jpeg" alt="User" />
-              <div className="user__description">
-                <p className="main__text">Александр Майков</p>
-                <p className="secondary__text _online">Онлайн</p>
-              </div>
-              <span className="Badge">3</span>
-            </div>
-          </div>
+         <Friends/>
           <div className="MusicBlock">
             <div className="MusicBlock__title">
               <h2>Вы недавно слушали</h2>
