@@ -2,6 +2,7 @@ interface IDataFriends {
   userImg: string;
   userMainText: string;
   userSecondaryText: string;
+  
 }
 export const dataFriends: IDataFriends[] = [
   {

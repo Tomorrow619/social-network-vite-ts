@@ -7,7 +7,10 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import { useLoginUserMutation } from "../../store/API/authApi";
-
+import { RootState } from "../../store/store";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 const AuthFormScheme = yup.object({
   userEmail: yup
     .string()
@@ -21,18 +24,20 @@ const AuthFormScheme = yup.object({
     .required("Пароль обязателен")
     .min(6, "Минимум 6 символов")
     .max(30, "не более 30 символов"),
-});
-
-export const LoginPage = () => {
-  interface SLoginPage {
+}); 
+interface ILoginForm {
     userEmail: string;
     userPassword: string;
   }
+
+export const LoginPage = () => {
+ const navigate = useNavigate();
+ const user = useSelector((state: RootState) => state.user.user);
   const {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<SLoginPage>({
+  } = useForm<ILoginForm>({
     resolver: yupResolver(AuthFormScheme),
     defaultValues: {
       userEmail: "",
@@ -42,7 +47,7 @@ export const LoginPage = () => {
   const  [loginUser,{ data: userData } ]= useLoginUserMutation( );
 
 
-  const formData: SubmitHandler<SLoginPage> = (data) => {
+  const formData: SubmitHandler<ILoginForm> = (data) => {
     const payloud = {
       email: data.userEmail,
       password: data.userPassword,
@@ -50,6 +55,11 @@ export const LoginPage = () => {
     loginUser(payloud);
     
   };
+  useEffect(() => {if(userData ?.user_id){
+    navigate("/main-page");
+}}, [userData] )
+
+ 
   return (
     <SLoginPage>
       <h1>Авторизация</h1>
@@ -90,7 +100,7 @@ export const LoginPage = () => {
       <Applink href="./ForgetPassword" linkText="Забыли пароль?" />
       <Applink href="#" linkText="Зарегистрироваться" />
       <IconsWrapper
-        regLink="./RegistrationPage"
+        regLink="registration-page"
         regEnterText="Войти с помощью"
         regText="У вас нет аккаунта?"
         regHrefText="Зарегестрироваться"

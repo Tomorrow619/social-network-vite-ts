@@ -1,6 +1,6 @@
 import { UserElem } from "../UI/UserElem/UserElem";
 import { dataFriends } from "./dataFriends";
-
+import { Badge } from "../UI/Badge/Badge";
 export const Friends = () => {
   return (
     <div className="List">
@@ -15,6 +15,7 @@ export const Friends = () => {
             userMainText={elem.userMainText}
             userSecondaryText={elem.userSecondaryText}
           />
+          
         ))}
     </div>
   );

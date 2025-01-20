@@ -5,6 +5,7 @@ type TAppButton = {
   buttonType: "button" | "submit";
   buttonClick?: () => {};
   isDisabled: boolean,
+
 };
 
 export const AppButton = ({

@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom"
+
 type TIconsWrapper = {
   regLink: string,
   regText: string,
@@ -11,7 +13,7 @@ export const IconsWrapper = ({regLink ,regText, regHrefText,regEnterText}:TIcons
     return (
     <div className="registration">
         <span>
-          {regText} <a href={regLink}>{regHrefText}</a>
+          {regText} <Link to={regLink}>{regHrefText}</Link>s
         </span>
         <p>{regEnterText}</p>
         <div className="icons-wrapper">
