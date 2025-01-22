@@ -11,6 +11,7 @@ import { RootState } from "../../store/store";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { useEffect } from "react";
+import { AppHeader } from "../../components/UI/AppHeader/AppHeader";
 const AuthFormScheme = yup.object({
   userEmail: yup
     .string()
@@ -24,15 +25,16 @@ const AuthFormScheme = yup.object({
     .required("Пароль обязателен")
     .min(6, "Минимум 6 символов")
     .max(30, "не более 30 символов"),
-}); 
+});
 interface ILoginForm {
-    userEmail: string;
-    userPassword: string;
-  }
+  userEmail: string;
+  userPassword: string;
+}
 
 export const LoginPage = () => {
- const navigate = useNavigate();
- const user = useSelector((state: RootState) => state.user.user);
+ 
+  const user = useSelector((state: RootState) => state.user.user);
+   const navigate = useNavigate();
   const {
     control,
     handleSubmit,
@@ -44,25 +46,24 @@ export const LoginPage = () => {
       userPassword: "",
     },
   });
-  const  [loginUser,{ data: userData } ]= useLoginUserMutation( );
+  const [loginUser, { data: userData }] = useLoginUserMutation();
 
-
-  const formData: SubmitHandler<ILoginForm> = (data) => {
+  const formData: SubmitHandler<ILoginForm> = async (data) => {
     const payloud = {
       email: data.userEmail,
       password: data.userPassword,
     };
     loginUser(payloud);
-    
   };
-  useEffect(() => {if(userData ?.user_id){
-    navigate("/main-page");
-}}, [userData] )
+  useEffect(() => {
+    if (userData?.user_id) {
+      navigate("/main-page");
+    }
+  }, [userData]);
 
- 
   return (
     <SLoginPage>
-      <h1>Авторизация</h1>
+      <AppHeader AppHeaderText="Авторизация" textType="h1" />
       <form action="#" onSubmit={handleSubmit(formData)}>
         <Controller
           control={control}
@@ -97,10 +98,10 @@ export const LoginPage = () => {
 
         <AppButton buttonText="Войти" buttonType="submit" isDisabled={false} />
       </form>
-      <Applink href="./ForgetPassword" linkText="Забыли пароль?" />
-      <Applink href="#" linkText="Зарегистрироваться" />
+      <Applink href="./forget-password" linkText="Забыли пароль?" />
+   
       <IconsWrapper
-        regLink="registration-page"
+        regLink="./registration-page"
         regEnterText="Войти с помощью"
         regText="У вас нет аккаунта?"
         regHrefText="Зарегестрироваться"

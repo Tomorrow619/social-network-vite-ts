@@ -4,9 +4,8 @@ import { AppInput } from "../../components/UI/AppInput/AppInput";
 import { Applink } from "../../components/UI/Applink/Applink";
 import { IconsWrapper } from "../../components/UI/IconsWrapper/IconsWrapper";
 import { useRegisterUserMutation } from "../../store/API/authApi";
-import "./RegistrationPage.scss";
+import { SLoginPage } from "../LoginPage/LoginPage.style";
 import { changeUser } from "../../store/userSlice";
-
 
 // export const RegistrationPage = ()=> {
 //     return (
@@ -33,6 +32,7 @@ import { useForm, Controller, SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { IRegisterUserPayload } from "../../store/API/authApi";
 import { useDispatch } from "react-redux";
+import { AppHeader } from "../../components/UI/AppHeader/AppHeader";
 
 const registrationFormScheme = yup.object({
   name: yup.string().required("Введите имя"),
@@ -53,8 +53,7 @@ export const RegistrationPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-   const [registerUser, {data: userData}]= useRegisterUserMutation();
-
+  const [registerUser, { data: userData }] = useRegisterUserMutation();
 
   const {
     control,
@@ -72,101 +71,94 @@ export const RegistrationPage = () => {
     },
   });
 
-
-   const formData: SubmitHandler<IRegisterUserPayload> = async (data) => {
-   const payload = {
-    name: data.name,
-    email: data.email,
-    phone_number: data.phone_number,
-    password: data.password,
-    user_city: data.user_city,
-  };
-  try {
-   const response = await registerUser(payload).unwrap();
-   
-   if (response.user_id){
-    dispatch(changeUser(payload));
-    navigate("/");
-   }
-  
-  
- } catch (error) {
-    console.error("Ошибка" + error);
-      };
-
-
+  const formData: SubmitHandler<IRegisterUserPayload> = async (data) => {
+    const payload = {
+      name: data.name,
+      email: data.email,
+      phone_number: data.phone_number,
+      password: data.password,
+      user_city: data.user_city,
     };
-   return (
-    <div className="LoginPage">
-    <h1>Авторизация</h1>
-     <form onSubmit={handleSubmit(formData)}>
-      <Controller
-        control={control}
-       name="name"
-       render={({ field }) => (
-        <AppInput
-          inputPlaceholder="Ваше имя"
-          inputType="text"
-          inputValue={field.value}
-          onChange={field.onChange}
-          isError={Boolean(errors.name)}
-          errorText={errors.name?.message}
-        />
-      )}
-    />
-    <Controller
-      control={control}
-      name="email"
-      render={({ field }) => (
-        <AppInput
-          inputPlaceholder="Введите почта"
-          inputType="email"
-          inputValue={field.value}
-          onChange={field.onChange}
-          isError={Boolean(errors.name)}
-          errorText={errors.name?.message}
-        />
-      )}
-    />
-    <Controller
-      control={control}
-      name="password"
-      render={({ field }) => (
-        <AppInput
-          inputPlaceholder="Пароль"
-          inputType="password"
-          inputValue={field.value}
-          onChange={field.onChange}
-          isError={Boolean(errors.name)}
-          errorText={errors.password?.message}
-        />
-      )}
-    />
-    <Controller
-      control={control}
-      name="user_city"
-      render={({ field }) => (
-        <AppInput
-          inputPlaceholder="Ваш город"
-         
-          inputValue={field.value}
-          onChange={field.onChange}
-          isError={Boolean(errors.user_city)}
-          errorText={errors.user_city?.message}
-          inputType="text"
-        />
-      )}
-    />
-    <AppButton buttonText="Войти" buttonType="submit" isDisabled={false} />
-    </form>
-    <Applink href="#" linkText="Забыли пароль?" />
-    <IconsWrapper
-    regLink="/register-page"
-    regText="Уже есть аккаунт?"
-    regHrefText="Войти"
-    regEnterText="Регистрация с помощью"
-     />
-     </div>
-   )
+    try {
+      const response = await registerUser(payload).unwrap();
 
+      if (response.user_id) {
+        dispatch(changeUser(payload));
+        navigate("/");
+      }
+    } catch (error) {
+      console.error("Ошибка" + error);
+    }
+  };
+  return (
+    <SLoginPage>
+      <AppHeader AppHeaderText="Зарегестрироваться" textType="h1"  />
+      <form onSubmit={handleSubmit(formData)}>
+        <Controller
+          control={control}
+          name="name"
+          render={({ field }) => (
+            <AppInput
+              inputPlaceholder="Ваше имя"
+              inputType="text"
+              inputValue={field.value}
+              onChange={field.onChange}
+              isError={Boolean(errors.name)}
+              errorText={errors.name?.message}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="email"
+          render={({ field }) => (
+            <AppInput
+              inputPlaceholder="Введите почту"
+              inputType="email"
+              inputValue={field.value}
+              onChange={field.onChange}
+              isError={Boolean(errors.name)}
+              errorText={errors.name?.message}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="password"
+          render={({ field }) => (
+            <AppInput
+              inputPlaceholder="Пароль"
+              inputType="password"
+              inputValue={field.value}
+              onChange={field.onChange}
+              isError={Boolean(errors.name)}
+              errorText={errors.password?.message}
+            />
+          )}
+        />
+        <Controller
+          control={control}
+          name="user_city"
+          render={({ field }) => (
+            <AppInput
+              inputPlaceholder="Ваш город"
+              inputValue={field.value}
+              onChange={field.onChange}
+              isError={Boolean(errors.user_city)}
+              errorText={errors.user_city?.message}
+              inputType="text"
+            />
+          )}
+        />
+        <AppButton buttonText="Войти" buttonType="submit" isDisabled={false} />
+      </form>
+      <Applink href="./forget-password" linkText="Забыли пароль?" />
+      <IconsWrapper
+        regLink="/"
+        regText="Уже есть аккаунт?"
+        regHrefText="Войти"
+        regEnterText="Регистрация с помощью"
+      />
+    </SLoginPage>
+  );
 };

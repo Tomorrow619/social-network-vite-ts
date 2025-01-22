@@ -46,4 +46,6 @@ export const dataList:IDataList[] = [
     listMain:"Look",
     listSecondary:"Мода",
 },
-]
+];
+
+

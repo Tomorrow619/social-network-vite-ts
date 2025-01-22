@@ -1,6 +1,6 @@
 import { UserElem } from "../UI/UserElem/UserElem";
 import { dataFriends } from "./dataFriends";
-import { Badge } from "../UI/Badge/Badge";
+// import { Badge } from "../UI/Badge/Badge";
 export const Friends = () => {
   return (
     <div className="List">

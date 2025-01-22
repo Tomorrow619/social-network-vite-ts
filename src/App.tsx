@@ -1,7 +1,7 @@
 import { LoginPage } from "./pages/LoginPage/LoginPage";
 import { MainPage } from "./pages/MainPage/MainPage";
 import { ProfilePage } from "./pages/ProfilePage/ProfilePage";
-
+import { ForgetPassword } from "./pages/ForgetPassword/ForgetPasswordPage";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import { SContainer } from "./themes/Container.style";
 import { RegistrationPage } from "./pages/RegistrationPage/RegistrationPage";
@@ -23,6 +23,10 @@ function App() {
     { path: "/registration-page", 
       element: <RegistrationPage /> 
 
+    },
+    {
+      path:"/forget-password",
+      element:<ForgetPassword/>
     },
   ]);
   return (

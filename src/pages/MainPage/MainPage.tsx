@@ -5,6 +5,7 @@ import { SMainPage } from "./SMainPage.style";
 import { List } from "../../components/List/List";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { Friends } from "../../components/Friends/Friends";
+import { MusicBlock } from "../../components/MusicBlock/MusicBlock";
 
 export const MainPage = () => {
   return (
@@ -587,6 +588,7 @@ export const MainPage = () => {
               <h2>Вы недавно слушали</h2>
               <span>123</span>
             </div>
+            
             <div className="MusicElem">
               <img src="./img/music/album-1.png" alt="Album" />
               <div className="music__description">
