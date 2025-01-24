@@ -26,7 +26,7 @@ const AuthFormScheme = yup.object({
     .min(6, "Минимум 6 символов")
     .max(30, "не более 30 символов"),
 });
-interface ILoginForm {
+interface ILoginPage {
   userEmail: string;
   userPassword: string;
 }
@@ -39,16 +39,16 @@ export const LoginPage = () => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<ILoginForm>({
+  } = useForm<ILoginPage>({
     resolver: yupResolver(AuthFormScheme),
     defaultValues: {
-      userEmail: "",
-      userPassword: "",
+      userEmail: `${user?.email ? user.email : ""}`,
+      userPassword: `${user?.password ? user.password : ""}`,
     },
   });
   const [loginUser, { data: userData }] = useLoginUserMutation();
 
-  const formData: SubmitHandler<ILoginForm> = async (data) => {
+  const formData: SubmitHandler<ILoginPage> = async (data) => {
     const payloud = {
       email: data.userEmail,
       password: data.userPassword,

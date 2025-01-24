@@ -35,7 +35,7 @@ import { useDispatch } from "react-redux";
 import { AppHeader } from "../../components/UI/AppHeader/AppHeader";
 
 const registrationFormScheme = yup.object({
-  name: yup.string().required("Введите имя"),
+  name: yup.string().required(),
   email: yup
     .string()
     .email("Введите корректный email")
@@ -53,7 +53,7 @@ export const RegistrationPage = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const [registerUser, { data: userData }] = useRegisterUserMutation();
+  const [registerUser] = useRegisterUserMutation();
 
   const {
     control,
@@ -61,7 +61,7 @@ export const RegistrationPage = () => {
     formState: { errors },
   } = useForm<IRegisterUserPayload>({
     resolver: yupResolver(registrationFormScheme),
-    mode: "onBlur",
+    // mode: "onBlur",
     defaultValues: {
       name: "",
       email: "",
@@ -103,7 +103,7 @@ export const RegistrationPage = () => {
               inputType="text"
               inputValue={field.value}
               onChange={field.onChange}
-              isError={Boolean(errors.name)}
+              isError={errors.email ? true : false}
               errorText={errors.name?.message}
             />
           )}
@@ -117,8 +117,23 @@ export const RegistrationPage = () => {
               inputType="email"
               inputValue={field.value}
               onChange={field.onChange}
-              isError={Boolean(errors.name)}
+              isError={errors.email ? true : false}
               errorText={errors.name?.message}
+            />
+          )}
+        />
+         <Controller
+          control={control}
+          name="phone_number"
+          render={({ field }) => (
+            <AppInput
+              inputPlaceholder="Ваш номер"
+              inputType="text"
+              {...field}
+              isError={errors.phone_number ? true : false}
+              errorText={errors.phone_number?.message}
+              inputValue={field.value}
+              onChange={field.onChange}
             />
           )}
         />

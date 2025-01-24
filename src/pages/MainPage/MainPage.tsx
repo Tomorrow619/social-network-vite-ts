@@ -5,11 +5,16 @@ import { SMainPage } from "./SMainPage.style";
 import { List } from "../../components/List/List";
 import { NavBar } from "../../components/NavBar/NavBar";
 import { Friends } from "../../components/Friends/Friends";
-import { MusicBlock } from "../../components/MusicBlock/MusicBlock";
+import { Post } from "../../components/Post/Post";
+import { useState } from "react";
+import { useGetAllPostsQuery } from "../../store/API/postApi";
 
 export const MainPage = () => {
+  const [liked, setLiked] = useState(false);
+  const { data, isLoading } = useGetAllPostsQuery(null)
   return (
     <>
+      {isLoading && <div>Loading...</div>}
       <Header />
       <SMainPage className="MainPage">
         <aside className="LeftSide">
@@ -170,11 +175,10 @@ export const MainPage = () => {
                 <span className="Badge">100</span>
               </li>
             </ul>
-          </nav>*/}     
-          <NavBar/>
-          
-           <List/> 
-         
+          </nav>*/}
+          <NavBar />
+
+          <List />
         </aside>
         <main className="Main">
           <div className="WhatsNew">
@@ -184,7 +188,7 @@ export const MainPage = () => {
               inputType="text"
               name="whats-new"
               id="whats-new"
-              style={{marginBottom:0}}
+              style={{ marginBottom: 0 }}
             />
 
             <div className="icons-wrapper">
@@ -326,7 +330,23 @@ export const MainPage = () => {
               </div>
             </div>
           </div>
-          <div className="Post _liked _marked">
+          {data?.message.length &&
+            data.message.map((elem) => ( 
+              <Post
+                postText={elem.main_text}
+                regDate={elem.reg_date}
+                userName={elem.user_fk.name}
+                isLiked={liked}
+                isMarked={false}
+                likeClick={() => setLiked(!liked)}
+              />
+            ))}
+          {/* <Post
+            isLiked={liked}
+            isMarked={false}
+            likeClick={() => setLiked(!liked)}
+          /> */}
+          {/* <div className="Post _liked _marked">
             <div className="UserElem">
               <img src="./img/users/aleksandr-maykov.jpeg" alt="User" />
               <div className="user__description">
@@ -457,7 +477,7 @@ export const MainPage = () => {
                 <circle id="ellipse_3" cx="2.5" cy="2.5" r="2.5" />
               </g>
             </svg>
-          </div>
+          </div> */}
           <div className="Post Repost _liked _marked">
             <div className="UserElem Repost__owner">
               <img src="./img/users/mark-krahmalev.jpeg" alt="User" />
@@ -582,13 +602,13 @@ export const MainPage = () => {
           </div>
         </main>
         <aside className="RightSide">
-         <Friends/>
+          <Friends />
           <div className="MusicBlock">
             <div className="MusicBlock__title">
               <h2>Вы недавно слушали</h2>
               <span>123</span>
             </div>
-            
+
             <div className="MusicElem">
               <img src="./img/music/album-1.png" alt="Album" />
               <div className="music__description">

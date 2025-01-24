@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IRegisterUserPayload } from "./API/authApi";
 
 interface initialState {
-  user: IRegisterUserPayload | null;
+  user: null | IRegisterUserPayload 
 }
 
 const initialState: initialState = {
