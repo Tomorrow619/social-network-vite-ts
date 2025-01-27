@@ -607,7 +607,7 @@ export const SMainPage = styled.div`
     .icon {
       height: 25px;
       overflow: visible;
-      fill: transparent;
+      /* fill: transparent; */
       transition: 200ms;
     }
 
