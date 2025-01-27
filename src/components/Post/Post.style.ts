@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
 
 interface SPostProps {
-  $isLiked: boolean;
-  $isMarked: boolean;
+  $isLiked?: boolean;
+  $isMarked?: boolean;
 }
 
 export const SPost = styled.div<SPostProps>`
@@ -29,22 +29,46 @@ export const SPost = styled.div<SPostProps>`
       }
     `}
 
-  
   ${(props) =>
     props.$isMarked &&
     css`
-      
-        .icon-wrapper {
-          .icon-mark {
-            fill: ${(props) => props.theme.color.primeColor};
-            stroke: 0;
-            stroke-width: 0;
-          }
+      .icon-wrapper {
+        .icon-mark {
+          fill: ${(props) => props.theme.color.primeColor};
+          stroke: 0;
+          stroke-width: 0;
         }
-      
+      }
     `}
 
   &__text {
     margin-bottom: 20px;
+  }
+`;
+
+export const SPostSetting = styled.div`
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  gap: 0 20px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 8px 12px;
+  border:2px solid ${(props) => props.theme.color.gray};
+  span {
+    font-size: 16px;
+    color: ${(props) => props.theme.color.blue};
+    cursor: pointer;
+    transition: all .3s;
+    border-radius: 8px;
+    padding: 6px 8px;
+    &:hover {
+      color: white;
+      background-color:orange;
+      text-shadow: #fff;
+      
+    }
   }
 `;

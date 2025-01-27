@@ -26,6 +26,15 @@ interface IGetPostByIdResponse {
   status: number;
   message: IPost;
 }
+interface IAddNewPostPayload  {
+  main_text: string;
+  user_id: number;
+  // photos: string[];
+}
+interface IAddNewPostResponse {
+  status: number;
+  post_id: number;
+}
 export const postApi = createApi({
   reducerPath: "postApi",
   baseQuery: fetchBaseQuery({ baseUrl }),
@@ -36,6 +45,13 @@ export const postApi = createApi({
     getPostById: builder.query<IGetPostByIdResponse, string>({
       query: (postId) => `/post?post_id=${postId}`,
     }),
+    addNewPost: builder.mutation<IAddNewPostResponse,IAddNewPostPayload>({
+      query: (payloud)=>({
+        url: "/post",
+        method: "POST",
+        body: payloud,
+      })
+    })
   }),
 });
 
